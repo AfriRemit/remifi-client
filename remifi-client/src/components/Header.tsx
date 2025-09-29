@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 
-interface HeaderProps {
-  currentPage?: 'home' | 'dashboard' | 'swap' | 'activity';
-  onPageChange?: (page: 'home' | 'dashboard' | 'swap' | 'activity') => void;
-}
-
-const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onPageChange }) => {
+const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -19,61 +15,41 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onPageChange }) =
         <div className="flex items-center justify-between">
           {/* Logo and Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <button
-              type="button"
-              onClick={() => onPageChange?.('home')}
-              className="flex items-center space-x-3 focus:outline-none"
-            >
+            <Link to="/" className="flex items-center space-x-3 focus:outline-none">
               <img src="/assets/Logo.png" alt="Remifi Logo" className="w-8 h-8" />
               <h1 className="text-2xl font-bold text-primary">Remifi</h1>
-            </button>
+            </Link>
             
             <nav className="flex items-center space-x-8">
-              <button 
-                onClick={() => {
-                  console.log('Dashboard clicked');
-                  onPageChange?.('dashboard');
-                }}
-                className={`text-primary hover:text-accent-green transition-colors duration-200 ${
-                  currentPage === 'dashboard' ? 'text-accent-green' : ''
-                }`}
+              <NavLink 
+                to="/dashboard"
+                className={({ isActive }) => `text-primary hover:text-accent-green transition-colors duration-200 ${isActive ? 'text-accent-green' : ''}`}
               >
                 Dashboard
-              </button>
-              <button 
-                onClick={() => {
-                  console.log('Swap clicked');
-                  onPageChange?.('swap');
-                }}
-                className={`text-primary hover:text-accent-green transition-colors duration-200 ${
-                  currentPage === 'swap' ? 'text-accent-green' : ''
-                }`}
+              </NavLink>
+              <NavLink 
+                to="/swap"
+                className={({ isActive }) => `text-primary hover:text-accent-green transition-colors duration-200 ${isActive ? 'text-accent-green' : ''}`}
               >
                 Swap
-              </button>
-              <button 
-                onClick={() => {
-                  console.log('Activity clicked');
-                  onPageChange?.('activity');
-                }}
-                className={`text-primary hover:text-accent-green transition-colors duration-200 ${
-                  currentPage === 'activity' ? 'text-accent-green' : ''
-                }`}
+              </NavLink>
+              <NavLink 
+                to="/activity"
+                className={({ isActive }) => `text-primary hover:text-accent-green transition-colors duration-200 ${isActive ? 'text-accent-green' : ''}`}
               >
                 Activity
-              </button>
+              </NavLink>
             </nav>
           </div>
 
           {/* Mobile Logo */}
-          <button
-            type="button"
-            onClick={() => onPageChange?.('home')}
+          <Link
+            to="/"
             className="md:hidden flex items-center space-x-3 focus:outline-none"
           >
             <img src="/assets/Logo.png" alt="Remifi Logo" className="w-8 h-8" />
             <h1 className="text-2xl font-bold text-primary">Remifi</h1>
-          </button>
+          </Link>
 
           {/* Desktop Right side actions */}
           <div className="hidden md:flex items-center space-x-4">
@@ -104,42 +80,27 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onPageChange }) =
             <div className="space-y-4">
               {/* Mobile Navigation Links */}
               <nav className="space-y-4">
-                <button 
-                  onClick={() => {
-                    console.log('Dashboard clicked (mobile)');
-                    onPageChange?.('dashboard');
-                    setIsMenuOpen(false);
-                  }}
-                  className={`block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${
-                    currentPage === 'dashboard' ? 'text-accent-green' : ''
-                  }`}
+                <NavLink 
+                  to="/dashboard"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={({ isActive }) => `block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${isActive ? 'text-accent-green' : ''}`}
                 >
                   Dashboard
-                </button>
-                <button 
-                  onClick={() => {
-                    console.log('Swap clicked (mobile)');
-                    onPageChange?.('swap');
-                    setIsMenuOpen(false);
-                  }}
-                  className={`block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${
-                    currentPage === 'swap' ? 'text-accent-green' : ''
-                  }`}
+                </NavLink>
+                <NavLink 
+                  to="/swap"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={({ isActive }) => `block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${isActive ? 'text-accent-green' : ''}`}
                 >
                   Swap
-                </button>
-                <button 
-                  onClick={() => {
-                    console.log('Activity clicked (mobile)');
-                    onPageChange?.('activity');
-                    setIsMenuOpen(false);
-                  }}
-                  className={`block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${
-                    currentPage === 'activity' ? 'text-accent-green' : ''
-                  }`}
+                </NavLink>
+                <NavLink 
+                  to="/activity"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={({ isActive }) => `block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${isActive ? 'text-accent-green' : ''}`}
                 >
                   Activity
-                </button>
+                </NavLink>
               </nav>
               
               {/* Mobile Right side actions */}

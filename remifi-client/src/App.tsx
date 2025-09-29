@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Header from './components/Header';
 import HeroSection from './components/home/HeroSection';
@@ -13,40 +13,28 @@ import ActivityPage from './pages/Activity';
 import Footer from './components/Footer';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'dashboard' | 'swap' | 'activity'>('home');
-
-  const handlePageChange = (page: 'home' | 'dashboard' | 'swap' | 'activity') => {
-    console.log('Page changing from', currentPage, 'to', page);
-    setCurrentPage(page);
-  };
-
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'dashboard':
-        return <DashboardPage />;
-      case 'swap':
-        return <SwapPage />;
-      case 'activity':
-        return <ActivityPage />;
-      default:
-        return (
-          <main>
-            <HeroSection />
-            <RatesSection />
-            <FeaturesSection />
-            <SecuritySection />
-            <FAQSection />
-          </main>
-        );
-    }
-  };
+  const Home = () => (
+    <main>
+      <HeroSection />
+      <RatesSection />
+      <FeaturesSection />
+      <SecuritySection />
+      <FAQSection />
+    </main>
+  );
 
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-primary text-primary transition-colors duration-300">
-        <Header currentPage={currentPage} onPageChange={handlePageChange} />
-        {renderPage()}
-        {currentPage === 'home' && <Footer />}
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/swap" element={<SwapPage />} />
+          <Route path="/activity" element={<ActivityPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+        <Footer />
       </div>
     </ThemeProvider>
   );
