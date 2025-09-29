@@ -1,0 +1,115 @@
+import React from 'react';
+import ShinyBlue from '../assets/3DShiny Blue.png';
+import TetherIcon from '../assets/Tether.png';
+import FrameIcon from '../assets/Frame.png';
+import IconsImage from '../assets/Icons.png';
+import NGNFlag from '../assets/ngn.png';
+import GHSFlag from '../assets/ghs.png';
+import KESFlag from '../assets/kes.png';
+import ZARFlag from '../assets/zar.png';
+
+const HeroSection: React.FC = () => {
+  return (
+    <section className="relative px-6 py-16 bg-primary overflow-hidden">
+      {/* Background gradient effects */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-radial from-red-500/20 via-orange-500/20 to-transparent rounded-full blur-3xl"></div>
+      <div className="absolute top-20 right-20 w-64 h-64 bg-gradient-radial from-green-500/20 via-blue-500/20 to-transparent rounded-full blur-2xl"></div>
+      
+
+      <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10">
+        {/* Left Content */}
+        <div className="space-y-8">
+          <div className="space-y-4">
+            <h1 className="text-5xl lg:text-6xl font-medium text-primary leading-tight">
+              Swap anything stable coin
+            </h1>
+            <p className="text-xl text-secondary">
+              Stable coins made easy
+            </p>
+          </div>
+          
+          <div className="space-y-4">
+            <p className="text-lg text-secondary">Trusted by communities in</p>
+            <div className="flex items-center">
+              {/* Horizontally stacked flags with hover expansion */}
+              <div className="flex items-center space-x-2">
+                <img src={NGNFlag} alt="Nigeria" className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-lg hover:scale-125 hover:z-10 transition-all duration-300 cursor-pointer" />
+                <img src={GHSFlag} alt="Ghana" className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-lg hover:scale-125 hover:z-10 transition-all duration-300 cursor-pointer" />
+                <img src={KESFlag} alt="Kenya" className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-lg hover:scale-125 hover:z-10 transition-all duration-300 cursor-pointer" />
+                <img src={ZARFlag} alt="South Africa" className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-lg hover:scale-125 hover:z-10 transition-all duration-300 cursor-pointer" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Content - Swap Widget */}
+        <div>
+          {/* You Send Section */}
+          <div className="bg-secondary rounded-2xl p-6 space-y-3 -mb-7">
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-secondary">You send</span>
+              <div className="flex space-x-2">
+                <button className="px-3 py-1 bg-tertiary hover:bg-quaternary text-primary text-sm rounded-full transition-colors duration-200">
+                  25%
+                </button>
+                <button className="px-3 py-1 bg-tertiary hover:bg-quaternary text-primary text-sm rounded-full transition-colors duration-200">
+                  50%
+                </button>
+                <button className="px-3 py-1 bg-tertiary hover:bg-quaternary text-primary text-sm rounded-full transition-colors duration-200">
+                  75%
+                </button>
+                <button className="px-3 py-1 bg-accent-green text-white text-sm rounded-full transition-colors duration-200">
+                  Max
+                </button>
+              </div>
+            </div>
+            
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-3xl font-bold text-primary">0</div>
+                <div className="text-sm text-secondary">$0.00</div>
+              </div>
+              <div className="flex items-center space-x-2 bg-tertiary rounded-full px-3 py-2">
+                <img src={FrameIcon} alt="Frame" className="w-6 h-6 rounded-full" />
+                <span className="text-primary font-medium">Flare</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Swap Toggle Icon - Floating between sections */}
+          <div className="flex justify-center">
+            <div className="w-12 h-12 bg-tertiary rounded-full flex items-center justify-center hover:bg-quaternary transition-colors duration-200 cursor-pointer">
+              <img 
+                src={IconsImage} 
+                alt="Swap toggle" 
+                className="w-6 h-6 dark:invert-0 invert"
+              />
+            </div>
+          </div>
+
+          {/* You Receive Section */}
+          <div className="bg-secondary rounded-2xl p-6 space-y-3 -mt-4">
+            <span className="text-sm text-secondary">You receive</span>
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-3xl font-bold text-primary">0</div>
+                <div className="text-sm text-secondary">$0.00</div>
+              </div>
+              <div className="flex items-center space-x-2 bg-tertiary rounded-full px-3 py-2">
+                <img src={TetherIcon} alt="Tether" className="w-6 h-6 rounded-full" />
+                <span className="text-primary font-medium">USDT</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Connect Wallet Button */}
+          <button className="w-full py-4 mt-4 text-accent-green rounded-full font-medium transition-colors duration-200 border-2 border-accent-green hover:bg-accent-green hover:text-white">
+            Connect Wallet
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default HeroSection;
