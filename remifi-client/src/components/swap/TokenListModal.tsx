@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import { POPULAR_TOKENS, TOKENS, TokenSymbol } from './tokens';
+import { POPULAR_TOKENS, TOKENS } from './tokens';
+import type { TokenSymbol } from './tokens';
 import TokenIcon from './TokenIcon';
 
 interface TokenListModalProps {

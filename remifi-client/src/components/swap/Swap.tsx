@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import TokenSelect from './TokenSelect';
 import type { TokenSymbol } from './tokens';
-import { getQuote } from './tokens';
+import { getQuote, MOCK_PRICES_USDT } from './tokens';
 
 // Legacy Coin type kept for reference; token selection now uses TokenSymbol
 
@@ -20,6 +20,25 @@ const Swap: React.FC = () => {
 
   const parsedSend = useMemo(() => Number.parseFloat(sendAmount || '0') || 0, [sendAmount]);
   const receiveQuote = useMemo(() => getQuote(parsedSend, sendCoin, receiveCoin), [parsedSend, sendCoin, receiveCoin]);
+  const sendUsd = useMemo(() => {
+    const price = MOCK_PRICES_USDT[sendCoin] ?? 0;
+    const usd = parsedSend * price;
+    return Number.isFinite(usd) ? usd : 0;
+  }, [parsedSend, sendCoin]);
+  const receiveUsd = useMemo(() => {
+    const price = MOCK_PRICES_USDT[receiveCoin] ?? 0;
+    const usd = (receiveQuote || 0) * price;
+    return Number.isFinite(usd) ? usd : 0;
+  }, [receiveQuote, receiveCoin]);
+
+  const toggleTokens = () => {
+    const prevSend = sendCoin;
+    const prevReceive = receiveCoin;
+    const nextSendAmount = receiveQuote && Number.isFinite(receiveQuote) ? String(Number(receiveQuote.toFixed(6))) : sendAmount;
+    setSendCoin(prevReceive);
+    setReceiveCoin(prevSend);
+    setSendAmount(nextSendAmount);
+  };
 
   return (
     <section className="px-6 py-8">
@@ -66,7 +85,7 @@ const Swap: React.FC = () => {
                 inputMode="decimal"
                 className="bg-transparent outline-none text-4xl font-semibold text-primary w-32"
               />
-              <div className="text-sm text-secondary">$0.00</div>
+              <div className="text-sm text-secondary">${sendUsd.toFixed(2)}</div>
             </div>
 
             <TokenSelect symbol={sendCoin} onChange={setSendCoin} />
@@ -77,13 +96,18 @@ const Swap: React.FC = () => {
 
         {/* switch icon - centered and floating */}
         <div className="flex justify-center">
-          <div className="w-10 h-10 bg-tertiary rounded-full flex items-center justify-center hover:bg-quaternary transition-colors duration-200 cursor-pointer">
+          <button
+            type="button"
+            onClick={toggleTokens}
+            aria-label="Switch tokens"
+            className="w-10 h-10 bg-tertiary rounded-full flex items-center justify-center hover:bg-quaternary transition-colors duration-200 cursor-pointer"
+          >
             <img
               src="/assets/swap-icon.svg"
               alt="swap toggle"
               className="w-5 h-5 filter brightness-0 dark:invert"
             />
-          </div>
+          </button>
         </div>
 
         {/* Receive card - mirror HeroSection styles */}
@@ -91,8 +115,8 @@ const Swap: React.FC = () => {
           <span className="text-sm text-secondary">You receive</span>
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-4xl font-semibold text-primary">{receiveQuote ? receiveQuote.toFixed(4) : 0}</div>
-              <div className="text-sm text-secondary">$0.00</div>
+              <div className="text-4xl font-semibold text-primary">{receiveQuote ? receiveQuote.toFixed(2) : 0}</div>
+              <div className="text-sm text-secondary">${receiveUsd.toFixed(2)}</div>
             </div>
             <TokenSelect symbol={receiveCoin} onChange={setReceiveCoin} />
           </div>

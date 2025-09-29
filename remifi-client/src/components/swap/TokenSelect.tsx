@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { TokenSymbol, TOKENS } from './tokens';
+import type { TokenSymbol } from './tokens';
+import { TOKENS } from './tokens';
 import TokenIcon from './TokenIcon';
 import TokenListModal from './TokenListModal';
 
@@ -10,7 +11,8 @@ interface TokenSelectProps {
 
 const TokenSelect: React.FC<TokenSelectProps> = ({ symbol, onChange }) => {
   const [open, setOpen] = useState(false);
-  const meta = TOKENS[symbol];
+  // Trigger re-render on symbol change; meta kept for potential future use.
+  void TOKENS[symbol];
 
   return (
     <>
