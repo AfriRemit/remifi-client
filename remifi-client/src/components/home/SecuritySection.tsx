@@ -1,5 +1,5 @@
 import React from "react";
-import GlassShield from "../assets/Glass Shield.png";
+const GlassShield = "/assets/Glass Shield.png";
 
 const SecuritySection: React.FC = () => {
   return (

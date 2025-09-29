@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import ThemeToggle from './ThemeToggle';
-import Logo from '../assets/Logo.png';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  currentPage?: 'home' | 'dashboard' | 'swap' | 'activity';
+  onPageChange?: (page: 'home' | 'dashboard' | 'swap' | 'activity') => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onPageChange }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -16,32 +20,50 @@ const Header: React.FC = () => {
           {/* Logo and Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <div className="flex items-center space-x-3">
-              <img src={Logo} alt="Remifi Logo" className="w-8 h-8" />
+              <img src="/assets/Logo.png" alt="Remifi Logo" className="w-8 h-8" />
               <h1 className="text-2xl font-bold text-primary">Remifi</h1>
             </div>
             
             <nav className="flex items-center space-x-8">
-              <a href="#swap" className="text-primary hover:text-accent-green transition-colors duration-200">
+              <button 
+                onClick={() => {
+                  console.log('Dashboard clicked');
+                  onPageChange?.('dashboard');
+                }}
+                className={`text-primary hover:text-accent-green transition-colors duration-200 ${
+                  currentPage === 'dashboard' ? 'text-accent-green' : ''
+                }`}
+              >
+                Dashboard
+              </button>
+              <button 
+                onClick={() => {
+                  console.log('Swap clicked');
+                  onPageChange?.('swap');
+                }}
+                className={`text-primary hover:text-accent-green transition-colors duration-200 ${
+                  currentPage === 'swap' ? 'text-accent-green' : ''
+                }`}
+              >
                 Swap
-              </a>
-              <a href="#rates" className="text-primary hover:text-accent-green transition-colors duration-200">
-                Rates
-              </a>
-              <a href="#buy" className="text-primary hover:text-accent-green transition-colors duration-200">
-                Buy
-              </a>
-              <a href="#sell" className="text-primary hover:text-accent-green transition-colors duration-200">
-                Sell
-              </a>
-              <a href="#pool" className="text-primary hover:text-accent-green transition-colors duration-200">
-                Pool
-              </a>
+              </button>
+              <button 
+                onClick={() => {
+                  console.log('Activity clicked');
+                  onPageChange?.('activity');
+                }}
+                className={`text-primary hover:text-accent-green transition-colors duration-200 ${
+                  currentPage === 'activity' ? 'text-accent-green' : ''
+                }`}
+              >
+                Activity
+              </button>
             </nav>
           </div>
 
           {/* Mobile Logo */}
           <div className="md:hidden flex items-center space-x-3">
-            <img src={Logo} alt="Remifi Logo" className="w-8 h-8" />
+            <img src="/assets/Logo.png" alt="Remifi Logo" className="w-8 h-8" />
             <h1 className="text-2xl font-bold text-primary">Remifi</h1>
           </div>
 
@@ -74,41 +96,42 @@ const Header: React.FC = () => {
             <div className="space-y-4">
               {/* Mobile Navigation Links */}
               <nav className="space-y-4">
-                <a 
-                  href="#swap" 
-                  className="block text-primary hover:text-accent-green transition-colors duration-200 py-2"
-                  onClick={() => setIsMenuOpen(false)}
+                <button 
+                  onClick={() => {
+                    console.log('Dashboard clicked (mobile)');
+                    onPageChange?.('dashboard');
+                    setIsMenuOpen(false);
+                  }}
+                  className={`block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${
+                    currentPage === 'dashboard' ? 'text-accent-green' : ''
+                  }`}
+                >
+                  Dashboard
+                </button>
+                <button 
+                  onClick={() => {
+                    console.log('Swap clicked (mobile)');
+                    onPageChange?.('swap');
+                    setIsMenuOpen(false);
+                  }}
+                  className={`block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${
+                    currentPage === 'swap' ? 'text-accent-green' : ''
+                  }`}
                 >
                   Swap
-                </a>
-                <a 
-                  href="#rates" 
-                  className="block text-primary hover:text-accent-green transition-colors duration-200 py-2"
-                  onClick={() => setIsMenuOpen(false)}
+                </button>
+                <button 
+                  onClick={() => {
+                    console.log('Activity clicked (mobile)');
+                    onPageChange?.('activity');
+                    setIsMenuOpen(false);
+                  }}
+                  className={`block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${
+                    currentPage === 'activity' ? 'text-accent-green' : ''
+                  }`}
                 >
-                  Rates
-                </a>
-                <a 
-                  href="#buy" 
-                  className="block text-primary hover:text-accent-green transition-colors duration-200 py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Buy
-                </a>
-                <a 
-                  href="#sell" 
-                  className="block text-primary hover:text-accent-green transition-colors duration-200 py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Sell
-                </a>
-                <a 
-                  href="#pool" 
-                  className="block text-primary hover:text-accent-green transition-colors duration-200 py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Pool
-                </a>
+                  Activity
+                </button>
               </nav>
               
               {/* Mobile Right side actions */}

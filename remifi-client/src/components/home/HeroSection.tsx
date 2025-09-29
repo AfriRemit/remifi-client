@@ -1,10 +1,10 @@
-import TetherIcon from '../assets/Tether.png';
-import FrameIcon from '../assets/Frame.png';
-import IconsImage from '../assets/Icons.png';
-import NGNFlag from '../assets/ngn.png';
-import GHSFlag from '../assets/ghs.png';
-import KESFlag from '../assets/kes.png';
-import ZARFlag from '../assets/zar.png';
+const TetherIcon = '/assets/Tether.png';
+const FrameIcon = '/assets/Frame.png';
+const SwapIcon = '/assets/swap-icon.svg';
+const NGNFlag = '/assets/ngn.png';
+const GHSFlag = '/assets/ghs.png';
+const KESFlag = '/assets/kes.png';
+const ZARFlag = '/assets/zar.png';
 
 const HeroSection: React.FC = () => {
   return (
@@ -19,10 +19,10 @@ const HeroSection: React.FC = () => {
         <div className="space-y-8">
           <div className="space-y-4">
             <h1 className="text-5xl lg:text-6xl font-medium text-primary leading-tight">
-              Swap anything stable coin
+              Swap stablecoins instantly
             </h1>
             <p className="text-xl text-secondary">
-              Stable coins made easy
+              Fast, low-fee swaps for every stablecoin
             </p>
           </div>
           
@@ -78,9 +78,10 @@ const HeroSection: React.FC = () => {
           <div className="flex justify-center">
             <div className="w-12 h-12 bg-tertiary rounded-full flex items-center justify-center hover:bg-quaternary transition-colors duration-200 cursor-pointer">
               <img 
-                src={IconsImage} 
+                src={SwapIcon} 
                 alt="Swap toggle" 
-                className="w-6 h-6 dark:invert-0 invert"
+                className="w-6 h-6"
+                style={{ filter: 'brightness(0) saturate(100%) invert(100%)' }}
               />
             </div>
           </div>

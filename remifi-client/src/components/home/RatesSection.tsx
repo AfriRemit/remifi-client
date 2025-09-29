@@ -1,8 +1,8 @@
 import React from 'react';
-import NGNFlag from '../assets/ngn.png';
-import KESFlag from '../assets/kes.png';
-import GHSFlag from '../assets/ghs.png';
-import ZARFlag from '../assets/zar.png';
+const NGNFlag = '/assets/ngn.png';
+const KESFlag = '/assets/kes.png';
+const GHSFlag = '/assets/ghs.png';
+const ZARFlag = '/assets/zar.png';
 
 interface CurrencyRate {
   country: string;

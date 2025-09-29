@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ShinyBlue from '../assets/3DShiny Blue.png';
+const ShinyBlue = '/assets/3DShiny Blue.png';
 
 interface FAQItem {
   question: string;

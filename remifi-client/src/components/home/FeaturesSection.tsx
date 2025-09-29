@@ -1,7 +1,7 @@
 import React from 'react';
-import ProtectIcon from '../assets/protect.png';
-import TransparentIcon from '../assets/transparent.png';
-import TrustIcon from '../assets/trust.png';
+const ProtectIcon = '/assets/protect.png';
+const TransparentIcon = '/assets/transparent.png';
+const TrustIcon = '/assets/trust.png';
 
 interface Feature {
   icon: React.ReactNode;
