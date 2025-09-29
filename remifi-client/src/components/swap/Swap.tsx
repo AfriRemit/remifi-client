@@ -41,6 +41,11 @@ const Swap: React.FC = () => {
   };
 
   const canSwap = parsedSend > 0 && sendCoin !== receiveCoin && Number.isFinite(receiveQuote) && (receiveQuote || 0) > 0;
+  const disabledReason = parsedSend <= 0
+    ? 'Enter amount'
+    : sendCoin === receiveCoin
+      ? 'Select different tokens'
+      : ((receiveQuote || 0) <= 0 ? 'No quote' : '');
   const handleSwap = () => {
     if (!canSwap) return;
     // Placeholder for real swap flow (e.g., wallet tx)
@@ -136,10 +141,14 @@ const Swap: React.FC = () => {
             onClick={handleSwap}
             disabled={!canSwap}
             className={`w-full px-6 py-4 rounded-2xl text-lg font-semibold shadow-lg transition-colors duration-200 ${
-              canSwap ? 'bg-accent-green text-white hover:bg-accent-green-hover' : 'bg-tertiary text-secondary cursor-not-allowed'
+              canSwap
+                ? 'bg-accent-green text-white hover:bg-accent-green-hover'
+                : 'bg-tertiary text-secondary cursor-not-allowed'
             }`}
+            title={canSwap ? 'Swap' : disabledReason}
+            aria-disabled={!canSwap}
           >
-            Swap
+            {canSwap ? 'Swap' : disabledReason}
           </button>
         </div>
       </div>
