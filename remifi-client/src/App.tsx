@@ -7,7 +7,9 @@ import RatesSection from './components/home/RatesSection';
 import FeaturesSection from './components/home/FeaturesSection';
 import SecuritySection from './components/home/SecuritySection';
 import FAQSection from './components/home/FAQSection';
-import Dashboard from './components/dashboard/Dashboard';
+import DashboardPage from './pages/Dashboard';
+import SwapPage from './pages/Swap';
+import ActivityPage from './pages/Activity';
 import Footer from './components/Footer';
 
 function App() {
@@ -21,11 +23,11 @@ function App() {
   const renderPage = () => {
     switch (currentPage) {
       case 'dashboard':
-        return <Dashboard />;
+        return <DashboardPage />;
       case 'swap':
-        return <div className="min-h-screen flex items-center justify-center"><p className="text-2xl">Swap Page Coming Soon</p></div>;
+        return <SwapPage />;
       case 'activity':
-        return <div className="min-h-screen flex items-center justify-center"><p className="text-2xl">Activity Page Coming Soon</p></div>;
+        return <ActivityPage />;
       default:
         return (
           <main>

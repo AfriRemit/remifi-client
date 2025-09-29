@@ -19,10 +19,14 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onPageChange }) =
         <div className="flex items-center justify-between">
           {/* Logo and Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <div className="flex items-center space-x-3">
+            <button
+              type="button"
+              onClick={() => onPageChange?.('home')}
+              className="flex items-center space-x-3 focus:outline-none"
+            >
               <img src="/assets/Logo.png" alt="Remifi Logo" className="w-8 h-8" />
               <h1 className="text-2xl font-bold text-primary">Remifi</h1>
-            </div>
+            </button>
             
             <nav className="flex items-center space-x-8">
               <button 
@@ -62,10 +66,14 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onPageChange }) =
           </div>
 
           {/* Mobile Logo */}
-          <div className="md:hidden flex items-center space-x-3">
+          <button
+            type="button"
+            onClick={() => onPageChange?.('home')}
+            className="md:hidden flex items-center space-x-3 focus:outline-none"
+          >
             <img src="/assets/Logo.png" alt="Remifi Logo" className="w-8 h-8" />
             <h1 className="text-2xl font-bold text-primary">Remifi</h1>
-          </div>
+          </button>
 
           {/* Desktop Right side actions */}
           <div className="hidden md:flex items-center space-x-4">
