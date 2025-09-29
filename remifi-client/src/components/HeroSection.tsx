@@ -1,5 +1,3 @@
-import React from 'react';
-import ShinyBlue from '../assets/3DShiny Blue.png';
 import TetherIcon from '../assets/Tether.png';
 import FrameIcon from '../assets/Frame.png';
 import IconsImage from '../assets/Icons.png';
