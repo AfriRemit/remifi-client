@@ -40,6 +40,13 @@ const Swap: React.FC = () => {
     setSendAmount(nextSendAmount);
   };
 
+  const canSwap = parsedSend > 0 && sendCoin !== receiveCoin && Number.isFinite(receiveQuote) && (receiveQuote || 0) > 0;
+  const handleSwap = () => {
+    if (!canSwap) return;
+    // Placeholder for real swap flow (e.g., wallet tx)
+    alert(`Swapping ${parsedSend} ${sendCoin} for ~${(receiveQuote || 0).toFixed(2)} ${receiveCoin}`);
+  };
+
   return (
     <section className="px-6 py-8">
       <div className="max-w-2xl mx-auto rounded-2xl">
@@ -120,6 +127,22 @@ const Swap: React.FC = () => {
             </div>
             <TokenSelect symbol={receiveCoin} onChange={setReceiveCoin} />
           </div>
+        </div>
+
+        {/* Swap button */}
+        <div className="mt-6">
+          <button
+            type="button"
+            onClick={handleSwap}
+            disabled={!canSwap}
+            className={`w-full px-6 py-4 rounded-2xl text-lg font-semibold shadow-lg transition-colors duration-200 ${
+              canSwap
+                ? 'bg-transparent text-accent-green border-2 border-accent-green hover:bg-accent-green hover:text-white'
+                : 'bg-transparent text-secondary border-2 border-white/20 cursor-not-allowed'
+            }`}
+          >
+            Swap
+          </button>
         </div>
       </div>
     </section>
