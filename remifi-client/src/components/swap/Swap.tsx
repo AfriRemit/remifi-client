@@ -77,8 +77,8 @@ const Swap: React.FC = () => {
             <img
               src="/assets/swap-icon.svg"
               alt="swap toggle"
-              className="w-5 h-5"
-              style={{ filter: 'brightness(0) saturate(100%) invert(100%)' }}
+              className="w-5 h-5 dark:invert"
+              style={{ filter: 'brightness(0) saturate(100%)' }}
             />
           </div>
         </div>
