@@ -1,8 +1,8 @@
 import React from 'react';
-const NGNFlag = '/assets/ngn.png';
-const KESFlag = '/assets/kes.png';
-const GHSFlag = '/assets/ghs.png';
-const ZARFlag = '/assets/zar.png';
+const NGNFlag = '/assets/ngn.svg';
+const KESFlag = '/assets/kes.svg';
+const GHSFlag = '/assets/ghs.svg';
+const ZARFlag = '/assets/zar.svg';
 
 interface CurrencyRate {
   country: string;
@@ -78,19 +78,15 @@ const RatesSection: React.FC = () => {
                 </div>
                 <div className="text-right">
                   <div className="text-primary font-bold">
-                    {currency.symbol}{currency.rate}
+                    {currency.symbol}&nbsp;{currency.rate}
                   </div>
                   <div className={`text-sm flex items-center justify-end space-x-1 ${
                     currency.change > 0 ? 'text-accent-green' : 'text-accent-red'
                   }`}>
                     {currency.change > 0 ? (
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                      </svg>
+                      <img src="/assets/gain.svg" alt="gain" className="w-4 h-4" />
                     ) : (
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
+                      <img src="/assets/loss.svg" alt="loss" className="w-4 h-4" />
                     )}
                     <span>{Math.abs(currency.change)}%</span>
                   </div>

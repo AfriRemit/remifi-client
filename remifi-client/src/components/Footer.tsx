@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <img src="/assets/Logo.png" alt="Remifi Logo" className="w-8 h-8" />
+            <img src="/assets/Remifi logo.svg" alt="Remifi Logo" className="w-8 h-8" />
             <h3 className="text-2xl font-bold text-primary">Remifi</h3>
           </div>
 

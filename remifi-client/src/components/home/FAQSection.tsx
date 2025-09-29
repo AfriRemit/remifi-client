@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-const ShinyBlue = '/assets/3DShiny Blue.png';
+const ShinyBlue = '/assets/3D  of a Shiny Blue Question Mark 1.svg';
 
 interface FAQItem {
   question: string;
@@ -38,7 +38,7 @@ const FAQSection: React.FC = () => {
 
   return (
     <section className="px-6 py-16 bg-primary">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         {/* Left Content - FAQ List */}
         <div className="bg-secondary rounded-2xl p-6">
           <h3 className="text-xl font-bold text-primary mb-6">Frequently Asked Questions</h3>
@@ -73,28 +73,23 @@ const FAQSection: React.FC = () => {
 
         {/* Right Content */}
         <div className="space-y-6">
-          <h2 className="text-4xl lg:text-5xl font-medium text-primary leading-tight">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-xl text-secondary leading-relaxed">
-            Got questions? We have answers. Find everything you need to know about 
-            using Remifi for your stablecoin transactions.
-          </p>
+          <div className="space-y-6">
+            <h2 className="text-4xl lg:text-5xl font-medium text-primary leading-tight">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-xl text-secondary leading-relaxed">
+              Got questions? We have answers. Find everything you need to know about 
+              using Remifi for your stablecoin transactions.
+            </p>
+          </div>
           
           {/* 3D Shiny Blue Image */}
-          <div className="flex justify-center lg:justify-start mt-8">
-            <div className="relative">
-            
-              {/* Main image container with metallic effect */}
-                <img 
-                  src={ShinyBlue} 
-                  alt="3D Shiny Blue" 
-                  width={300}
-                  height={300}
-                />
-            
-             
-            </div>
+          <div className="flex justify-center lg:justify-start mt-12">
+            <img 
+              src={ShinyBlue} 
+              alt="3D Shiny Blue" 
+              className="w-full h-full object-cover max-w-400 max-h-700 sm:max-w-500 sm:max-h-1200"
+            />
           </div>
         </div>
       </div>

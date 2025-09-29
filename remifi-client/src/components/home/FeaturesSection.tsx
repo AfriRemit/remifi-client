@@ -1,7 +1,7 @@
 import React from 'react';
-const ProtectIcon = '/assets/protect.png';
-const TransparentIcon = '/assets/transparent.png';
-const TrustIcon = '/assets/trust.png';
+const FrameIcon1 = '/assets/Frame 48100562 (1).svg';
+const FrameIcon2 = '/assets/Frame 48100562 (2).svg';
+const FrameIcon3 = '/assets/Frame 48100562.svg';
 
 interface Feature {
   icon: React.ReactNode;
@@ -13,21 +13,21 @@ const FeaturesSection: React.FC = () => {
   const features: Feature[] = [
     {
       icon: (
-        <img src={ProtectIcon} alt="Protect" className="w-12 h-12" />
+        <img src={FrameIcon1} alt="Feature icon 1" className="w-12 h-12" />
       ),
       title: 'Audited Smart Contracts',
       description: 'Tamper-proof security with regular audits by leading blockchain security firms.'
     },
     {
       icon: (
-        <img src={TransparentIcon} alt="Transparent" className="w-12 h-12" />
+        <img src={FrameIcon2} alt="Feature icon 2" className="w-12 h-12" />
       ),
       title: 'Compliant & Transparent',
       description: 'Full KYC/AML compliance and GDPR standards with complete transaction transparency.'
     },
     {
       icon: (
-        <img src={TrustIcon} alt="Trust" className="w-12 h-12" />
+        <img src={FrameIcon3} alt="Feature icon 3" className="w-12 h-12" />
       ),
       title: 'Trusted Partnerships',
       description: 'Direct integration with mobile money operators and local banks across Africa.'

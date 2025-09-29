@@ -1,5 +1,5 @@
 
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Header from './components/Header';
 import HeroSection from './components/home/HeroSection';
@@ -13,6 +13,9 @@ import ActivityPage from './pages/Activity';
 import Footer from './components/Footer';
 
 function App() {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
   const Home = () => (
     <main>
       <HeroSection />
@@ -34,7 +37,7 @@ function App() {
           <Route path="/activity" element={<ActivityPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-        <Footer />
+        {isHomePage && <Footer />}
       </div>
     </ThemeProvider>
   );

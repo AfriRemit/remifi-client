@@ -1,10 +1,10 @@
 const TetherIcon = '/assets/Tether.png';
 const FrameIcon = '/assets/Frame.png';
 const SwapIcon = '/assets/swap-icon.svg';
-const NGNFlag = '/assets/ngn.png';
-const GHSFlag = '/assets/ghs.png';
-const KESFlag = '/assets/kes.png';
-const ZARFlag = '/assets/zar.png';
+const NGNFlag = '/assets/ngn.svg';
+const GHSFlag = '/assets/ghs.svg';
+const KESFlag = '/assets/kes.svg';
+const ZARFlag = '/assets/zar.svg';
 
 const HeroSection: React.FC = () => {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-const GlassShield = "/assets/Glass Shield.png";
+const GlassShield = "/assets/Frosted Glass Shield Icon 1.svg";
 
 const SecuritySection: React.FC = () => {
   return (
@@ -25,7 +25,7 @@ const SecuritySection: React.FC = () => {
             {/* Main image container with metallic effect */}
             <img
               src={GlassShield}
-              alt="Glass Shield"
+              alt="Frosted Glass Shield"
               className="w-full -full object-contain"
             />
           </div>

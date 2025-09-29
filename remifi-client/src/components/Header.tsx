@@ -16,7 +16,7 @@ const Header: React.FC = () => {
           {/* Logo and Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/" className="flex items-center space-x-3 focus:outline-none">
-              <img src="/assets/Logo.png" alt="Remifi Logo" className="w-8 h-8" />
+              <img src="/assets/Remifi logo.svg" alt="Remifi Logo" className="w-8 h-8" />
               <h1 className="text-2xl font-bold text-primary">Remifi</h1>
             </Link>
             
@@ -47,7 +47,7 @@ const Header: React.FC = () => {
             to="/"
             className="md:hidden flex items-center space-x-3 focus:outline-none"
           >
-            <img src="/assets/Logo.png" alt="Remifi Logo" className="w-8 h-8" />
+            <img src="/assets/Remifi logo.svg" alt="Remifi Logo" className="w-8 h-8" />
             <h1 className="text-2xl font-bold text-primary">Remifi</h1>
           </Link>
 
