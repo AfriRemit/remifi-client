@@ -136,9 +136,7 @@ const Swap: React.FC = () => {
             onClick={handleSwap}
             disabled={!canSwap}
             className={`w-full px-6 py-4 rounded-2xl text-lg font-semibold shadow-lg transition-colors duration-200 ${
-              canSwap
-                ? 'bg-transparent text-accent-green border-2 border-accent-green hover:bg-accent-green hover:text-white'
-                : 'bg-transparent text-secondary border-2 border-white/20 cursor-not-allowed'
+              canSwap ? 'bg-accent-green text-white hover:bg-accent-green-hover' : 'bg-tertiary text-secondary cursor-not-allowed'
             }`}
           >
             Swap
