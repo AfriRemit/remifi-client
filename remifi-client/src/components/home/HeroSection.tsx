@@ -1,5 +1,5 @@
-const TetherIcon = '/assets/Tether.png';
-const FrameIcon = '/assets/Frame.png';
+const TetherIcon = '/assets/USDT.svg';
+const FrameIcon = '/assets/flare.svg';
 const SwapIcon = '/assets/swap-icon.svg';
 const NGNFlag = '/assets/ngn.svg';
 const GHSFlag = '/assets/ghs.svg';
@@ -31,10 +31,10 @@ const HeroSection: React.FC = () => {
             <div className="flex items-center">
               {/* Horizontally stacked flags with hover expansion */}
               <div className="flex items-center space-x-2">
-                <img src={NGNFlag} alt="Nigeria" className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-lg hover:scale-125 hover:z-10 transition-all duration-300 cursor-pointer" />
-                <img src={GHSFlag} alt="Ghana" className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-lg hover:scale-125 hover:z-10 transition-all duration-300 cursor-pointer" />
-                <img src={KESFlag} alt="Kenya" className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-lg hover:scale-125 hover:z-10 transition-all duration-300 cursor-pointer" />
-                <img src={ZARFlag} alt="South Africa" className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-lg hover:scale-125 hover:z-10 transition-all duration-300 cursor-pointer" />
+                <img src={NGNFlag} alt="Nigeria" className="w-12 h-12 rounded-full object-cover border border-white/40 shadow-lg hover:scale-125 hover:z-10 transition-all duration-300 cursor-pointer" />
+                <img src={GHSFlag} alt="Ghana" className="w-12 h-12 rounded-full object-cover border border-white/40 shadow-lg hover:scale-125 hover:z-10 transition-all duration-300 cursor-pointer" />
+                <img src={KESFlag} alt="Kenya" className="w-12 h-12 rounded-full object-cover border border-white/40 shadow-lg hover:scale-125 hover:z-10 transition-all duration-300 cursor-pointer" />
+                <img src={ZARFlag} alt="South Africa" className="w-12 h-12 rounded-full object-cover border border-white/40 shadow-lg hover:scale-125 hover:z-10 transition-all duration-300 cursor-pointer" />
               </div>
             </div>
           </div>
@@ -68,7 +68,7 @@ const HeroSection: React.FC = () => {
                 <div className="text-sm text-secondary">$0.00</div>
               </div>
               <div className="flex items-center space-x-2 bg-tertiary rounded-full px-3 py-2">
-                <img src={FrameIcon} alt="Frame" className="w-6 h-6 rounded-full" />
+                <img src={FrameIcon} alt="Flare" className="w-6 h-6 rounded-full" />
                 <span className="text-primary font-medium">Flare</span>
               </div>
             </div>
@@ -95,7 +95,7 @@ const HeroSection: React.FC = () => {
                 <div className="text-sm text-secondary">$0.00</div>
               </div>
               <div className="flex items-center space-x-2 bg-tertiary rounded-full px-3 py-2">
-                <img src={TetherIcon} alt="Tether" className="w-6 h-6 rounded-full" />
+                <img src={TetherIcon} alt="USDT" className="w-6 h-6 rounded-full" />
                 <span className="text-primary font-medium">USDT</span>
               </div>
             </div>

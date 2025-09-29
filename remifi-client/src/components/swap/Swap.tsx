@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import TokenSelect from './TokenSelect';
+import type { TokenSymbol } from './tokens';
+import { getQuote } from './tokens';
 
-type Coin = 'Flare' | 'USDT' | 'Select';
+// Legacy Coin type kept for reference; token selection now uses TokenSymbol
 
 const Swap: React.FC = () => {
   const [sendAmount, setSendAmount] = useState<string>('0');
-  const [sendCoin] = useState<Coin>('Flare');
-  const [receiveCoin] = useState<Coin>('Select');
+  const [sendCoin, setSendCoin] = useState<TokenSymbol>('FLARE');
+  const [receiveCoin, setReceiveCoin] = useState<TokenSymbol>('USDT');
+
+  
 
   const setPercent = (p: number) => {
     // Placeholder: in a real app, use balance to compute
     const base = 100;
     setSendAmount(String(Math.floor((base * p) / 100)));
   };
+
+  const parsedSend = useMemo(() => Number.parseFloat(sendAmount || '0') || 0, [sendAmount]);
+  const receiveQuote = useMemo(() => getQuote(parsedSend, sendCoin, receiveCoin), [parsedSend, sendCoin, receiveCoin]);
 
   return (
     <section className="px-6 py-8">
@@ -61,11 +69,7 @@ const Swap: React.FC = () => {
               <div className="text-sm text-secondary">$0.00</div>
             </div>
 
-            <div className="flex items-center gap-2 bg-tertiary rounded-full px-3 py-1.5 cursor-pointer">
-              <img src="/assets/Frame.png" alt="coin" className="w-5 h-5 rounded-full" />
-              <span className="text-primary font-medium">{sendCoin}</span>
-              <svg className="w-3.5 h-3.5 text-secondary" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5H7z"/></svg>
-            </div>
+            <TokenSelect symbol={sendCoin} onChange={setSendCoin} />
           </div>
 
           <div className="text-right text-sm text-secondary mt-3">Balance: 100 {sendCoin}</div>
@@ -77,8 +81,7 @@ const Swap: React.FC = () => {
             <img
               src="/assets/swap-icon.svg"
               alt="swap toggle"
-              className="w-5 h-5 dark:invert"
-              style={{ filter: 'brightness(0) saturate(100%)' }}
+              className="w-5 h-5 filter brightness-0 dark:invert"
             />
           </div>
         </div>
@@ -88,19 +91,10 @@ const Swap: React.FC = () => {
           <span className="text-sm text-secondary">You receive</span>
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-4xl font-semibold text-primary">0</div>
+              <div className="text-4xl font-semibold text-primary">{receiveQuote ? receiveQuote.toFixed(4) : 0}</div>
               <div className="text-sm text-secondary">$0.00</div>
             </div>
-            {receiveCoin === 'Select' ? (
-              <button className="px-4 py-2.5 bg-accent-green text-white rounded-full font-medium hover:bg-accent-green-hover transition-colors duration-200 text-sm">
-                Select Coin
-              </button>
-            ) : (
-              <div className="flex items-center gap-2 bg-tertiary rounded-full px-3 py-2">
-                <img src="/assets/Tether.png" alt="recv coin" className="w-5 h-5 rounded-full" />
-                <span className="text-primary font-medium">{receiveCoin}</span>
-              </div>
-            )}
+            <TokenSelect symbol={receiveCoin} onChange={setReceiveCoin} />
           </div>
         </div>
       </div>
