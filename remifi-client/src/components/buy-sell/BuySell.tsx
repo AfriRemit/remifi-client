@@ -37,9 +37,9 @@ const BuySell: React.FC = () => {
         </div>
 
         {activeTab === 'buy' ? (
-          <Buy onTabChange={setActiveTab} />
+          <Buy />
         ) : (
-          <Sell onTabChange={setActiveTab} />
+          <Sell />
         )}
       </div>
     </section>

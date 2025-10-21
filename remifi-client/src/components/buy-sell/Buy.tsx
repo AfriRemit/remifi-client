@@ -258,4 +258,4 @@ const Buy: React.FC<BuyProps> = () => {
   );
 };
 
-export default Sell;
+export default Buy;
