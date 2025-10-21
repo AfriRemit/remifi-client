@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TokenSelect from '../components/swap/TokenSelect';
 import type { TokenSymbol } from '../components/swap/tokens';
-import { TOKENS, MOCK_PRICES_USDT } from '../components/swap/tokens';
+import { MOCK_PRICES_USDT } from '../components/swap/tokens';
 
 interface PoolCreationFormProps {
   onSubmit: (poolData: PoolData) => void;

@@ -3,13 +3,11 @@ import TokenSelect from '../swap/TokenSelect';
 import CountrySelect, { type CountryCode, COUNTRIES } from './CountrySelect';
 import TransactionConfirmationModal from './TransactionConfirmationModal';
 import type { TokenSymbol } from '../swap/tokens';
-import { getQuote, MOCK_PRICES_USDT, TOKENS } from '../swap/tokens';
+import { getQuote, MOCK_PRICES_USDT } from '../swap/tokens';
 
-interface SellProps {
-  onTabChange?: (tab: 'buy' | 'sell') => void;
-}
+interface SellProps {}
 
-const Sell: React.FC<SellProps> = ({ onTabChange }) => {
+const Sell: React.FC<SellProps> = () => {
   const [amount, setAmount] = useState<string>('0');
   const [stablecoin, setStablecoin] = useState<TokenSymbol>('USDT');
   const [country, setCountry] = useState<CountryCode>('NG');

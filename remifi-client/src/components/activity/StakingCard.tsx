@@ -23,15 +23,13 @@ interface StakingCardProps {
   availablePools?: StakingPool[];
   onClaimRewards?: (positionId: string) => void;
   onStake?: (pool: StakingPool) => void;
-  onUnstake?: (positionId: string) => void;
 }
 
 const StakingCard: React.FC<StakingCardProps> = ({ 
   activePositions = [], 
   availablePools = [],
   onClaimRewards,
-  onStake,
-  onUnstake
+  onStake
 }) => {
   return (
     <div className="grid md:grid-cols-2 gap-6">

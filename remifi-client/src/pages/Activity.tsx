@@ -174,11 +174,6 @@ const ActivityPage: React.FC = () => {
     // Implement stake logic
   };
 
-  const handleUnstake = (positionId: string) => {
-    console.log('Unstake position:', positionId);
-    // Implement unstake logic
-  };
-
   const filteredTransactions = transactions.filter(tx => {
     if (activeTab === 'all') return true;
     if (activeTab === 'swaps') return tx.type === 'swap';
@@ -288,7 +283,6 @@ const ActivityPage: React.FC = () => {
               ]}
               onClaimRewards={handleClaimRewards}
               onStake={handleStake}
-              onUnstake={handleUnstake}
             />
           </div>
         )}
