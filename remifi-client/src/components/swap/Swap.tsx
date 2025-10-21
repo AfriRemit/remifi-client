@@ -95,7 +95,7 @@ const Swap: React.FC = () => {
                 value={sendAmount}
                 onChange={(e) => setSendAmount(e.target.value)}
                 inputMode="decimal"
-                className="bg-transparent outline-none text-4xl font-semibold text-primary w-32"
+                className="bg-transparent outline-none focus:outline-none text-4xl font-semibold text-primary w-32"
               />
               <div className="text-sm text-secondary">${sendUsd.toFixed(2)}</div>
             </div>

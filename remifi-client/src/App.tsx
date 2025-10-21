@@ -9,7 +9,10 @@ import SecuritySection from './components/home/SecuritySection';
 import FAQSection from './components/home/FAQSection';
 import DashboardPage from './pages/Dashboard';
 import SwapPage from './pages/Swap';
+import BuySellPage from './pages/BuySell';
 import ActivityPage from './pages/Activity';
+import UtilitiesPage from './pages/Utilities';
+import CreatePoolPage from './pages/CreatePool';
 import Footer from './components/Footer';
 
 function App() {
@@ -34,7 +37,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/swap" element={<SwapPage />} />
+          <Route path="/buy-sell" element={<BuySellPage />} />
           <Route path="/activity" element={<ActivityPage />} />
+          <Route path="/utilities" element={<UtilitiesPage />} />
+          <Route path="/create-pool" element={<CreatePoolPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         {isHomePage && <Footer />}

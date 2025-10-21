@@ -7,9 +7,10 @@ import TokenListModal from './TokenListModal';
 interface TokenSelectProps {
   symbol: TokenSymbol;
   onChange: (symbol: TokenSymbol) => void;
+  title?: string;
 }
 
-const TokenSelect: React.FC<TokenSelectProps> = ({ symbol, onChange }) => {
+const TokenSelect: React.FC<TokenSelectProps> = ({ symbol, onChange, title }) => {
   const [open, setOpen] = useState(false);
   // Trigger re-render on symbol change; meta kept for potential future use.
   void TOKENS[symbol];
@@ -30,6 +31,7 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ symbol, onChange }) => {
         isOpen={open}
         onClose={() => setOpen(false)}
         onSelect={(s) => onChange(s)}
+        title={title}
       />
     </>
   );

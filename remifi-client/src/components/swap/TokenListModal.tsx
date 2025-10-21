@@ -7,9 +7,10 @@ interface TokenListModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSelect: (symbol: TokenSymbol) => void;
+  title?: string;
 }
 
-const TokenListModal: React.FC<TokenListModalProps> = ({ isOpen, onClose, onSelect }) => {
+const TokenListModal: React.FC<TokenListModalProps> = ({ isOpen, onClose, onSelect, title }) => {
   const [query, setQuery] = useState('');
   const tokens = Object.values(TOKENS);
   const filtered = useMemo(() => {
@@ -25,7 +26,7 @@ const TokenListModal: React.FC<TokenListModalProps> = ({ isOpen, onClose, onSele
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
       <div className="relative bg-secondary border border-white/10 rounded-2xl w-full max-w-md p-4">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-lg font-semibold text-primary">Select a token</h3>
+          <h3 className="text-lg font-semibold text-primary">{title || 'Select a token'}</h3>
           <button onClick={onClose} className="p-1 text-secondary hover:text-primary">✕</button>
         </div>
         <input
