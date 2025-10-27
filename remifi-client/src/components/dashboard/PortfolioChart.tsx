@@ -152,21 +152,21 @@ const PortfolioChart: React.FC = () => {
 
   return (
     <motion.div 
-      className="bg-secondary rounded-xl p-6 border border-white/10"
+      className="bg-secondary rounded-xl p-4 md:p-6 border border-white/10"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
       {/* Header */}
-      <div className="flex items-start justify-between mb-6">
+      <div className="mb-4 md:mb-6">
         <div>
-          <h3 className="text-lg font-semibold text-primary mb-2">Portfolio Value</h3>
-          <p className="text-3xl font-bold text-primary">${portfolioData.current.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-          <div className="flex items-center gap-2 mt-1">
-            <p className="text-sm text-accent-green font-medium">
+          <h3 className="text-sm md:text-lg font-semibold text-primary mb-1.5 md:mb-2">Portfolio Value</h3>
+          <p className="text-xl md:text-3xl font-bold text-primary">${portfolioData.current.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+          <div className="flex items-center gap-1.5 md:gap-2 mt-1 flex-wrap">
+            <p className="text-xs md:text-sm text-accent-green font-medium">
               +${portfolioData.change30d.toFixed(2)}
             </p>
-            <p className="text-sm text-accent-green font-medium">
+            <p className="text-xs md:text-sm text-accent-green font-medium">
               ({portfolioData.change30dPercent}%)
             </p>
             <span className="text-xs text-secondary">30d</span>
@@ -175,34 +175,34 @@ const PortfolioChart: React.FC = () => {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-3 gap-4 mb-6">
-        <div className="bg-tertiary/50 rounded-lg p-3 border border-white/5">
-          <p className="text-xs text-secondary mb-1">24h Change</p>
-          <p className="text-lg font-semibold text-accent-green">
+      <div className="grid grid-cols-3 gap-2 md:gap-4 mb-4 md:mb-6">
+        <div className="bg-tertiary/50 rounded-lg p-2 md:p-3 border border-white/5">
+          <p className="text-[10px] md:text-xs text-secondary mb-0.5 md:mb-1">24h Change</p>
+          <p className="text-xs md:text-lg font-semibold text-accent-green">
             +${portfolioData.change24h.toFixed(2)}
           </p>
         </div>
-        <div className="bg-tertiary/50 rounded-lg p-3 border border-white/5">
-          <p className="text-xs text-secondary mb-1">7d Change</p>
-          <p className="text-lg font-semibold text-accent-green">
+        <div className="bg-tertiary/50 rounded-lg p-2 md:p-3 border border-white/5">
+          <p className="text-[10px] md:text-xs text-secondary mb-0.5 md:mb-1">7d Change</p>
+          <p className="text-xs md:text-lg font-semibold text-accent-green">
             +${portfolioData.change7d.toFixed(2)}
           </p>
         </div>
-        <div className="bg-tertiary/50 rounded-lg p-3 border border-white/5">
-          <p className="text-xs text-secondary mb-1">Assets</p>
-          <p className="text-lg font-semibold text-primary">
+        <div className="bg-tertiary/50 rounded-lg p-2 md:p-3 border border-white/5">
+          <p className="text-[10px] md:text-xs text-secondary mb-0.5 md:mb-1">Assets</p>
+          <p className="text-xs md:text-lg font-semibold text-primary">
             {portfolioData.totalAssets}
           </p>
         </div>
       </div>
 
       {/* Time Range Selector */}
-      <div className="flex items-center gap-2 mb-4">
+      <div className="flex items-center gap-1.5 md:gap-2 mb-4 overflow-x-auto">
         {timeRanges.map((range) => (
           <button
             key={range}
             onClick={() => setTimeRange(range)}
-            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-200 ${
+            className={`px-2 md:px-3 py-1 md:py-1.5 rounded-lg text-xs md:text-sm font-medium transition-colors duration-200 whitespace-nowrap ${
               timeRange === range
                 ? 'bg-accent-green text-white'
                 : 'bg-tertiary text-secondary hover:bg-quaternary hover:text-primary'
@@ -214,7 +214,7 @@ const PortfolioChart: React.FC = () => {
       </div>
 
       {/* Chart */}
-      <div style={{ height: '200px' }}>
+      <div style={{ height: '150px' }} className="md:min-h-[200px]">
         <Line data={data} options={options} />
       </div>
     </motion.div>

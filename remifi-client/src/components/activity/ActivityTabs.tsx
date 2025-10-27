@@ -17,15 +17,15 @@ const ActivityTabs: React.FC<ActivityTabsProps> = ({ activeTab, onTabChange }) =
   ];
 
   return (
-    <div className="flex mb-6 bg-tertiary rounded-xl p-1">
+    <div className="flex gap-1.5 md:gap-2 mb-4 md:mb-6 overflow-x-auto pb-2 -mx-1 px-1">
       {tabs.map((tab) => (
         <button
           key={tab.key}
           onClick={() => onTabChange(tab.key)}
-          className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
+          className={`px-2.5 md:px-3 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-medium transition-colors duration-200 whitespace-nowrap ${
             activeTab === tab.key
               ? 'bg-accent-green text-white'
-              : 'text-secondary hover:text-primary'
+              : 'bg-tertiary text-secondary hover:bg-quaternary hover:text-primary'
           }`}
         >
           {tab.label}
