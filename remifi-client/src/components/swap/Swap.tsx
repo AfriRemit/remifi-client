@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import TokenSelect from './TokenSelect';
 import type { TokenSymbol } from './tokens';
 import { getQuote, MOCK_PRICES_USDT } from './tokens';
