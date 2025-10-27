@@ -18,7 +18,7 @@ const BuySell: React.FC = () => {
             onClick={() => setActiveTab('buy')}
             className={`px-6 py-3 font-medium border-b-2 transition-colors ${
               activeTab === 'buy' 
-                ? 'text-white border-accent-green' 
+                ? 'text-primary border-accent-green' 
                 : 'text-secondary border-transparent hover:text-primary'
             }`}
           >
@@ -28,7 +28,7 @@ const BuySell: React.FC = () => {
             onClick={() => setActiveTab('sell')}
             className={`px-6 py-3 font-medium border-b-2 transition-colors ${
               activeTab === 'sell' 
-                ? 'text-white border-accent-green' 
+                ? 'text-primary border-accent-green' 
                 : 'text-secondary border-transparent hover:text-primary'
             }`}
           >

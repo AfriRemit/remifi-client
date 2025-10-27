@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import TokenSelect from './TokenSelect';
 import type { TokenSymbol } from './tokens';
 import { getQuote, MOCK_PRICES_USDT } from './tokens';
@@ -54,7 +55,12 @@ const Swap: React.FC = () => {
 
   return (
     <section className="px-6 py-8">
-      <div className="max-w-2xl mx-auto rounded-2xl">
+      <motion.div 
+        className="max-w-2xl mx-auto rounded-2xl"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl md:text-2xl font-semibold text-primary">Swap</h2>
           <button
@@ -108,18 +114,20 @@ const Swap: React.FC = () => {
 
         {/* switch icon - centered and floating */}
         <div className="flex justify-center">
-          <button
+          <motion.button
             type="button"
             onClick={toggleTokens}
             aria-label="Switch tokens"
             className="w-10 h-10 bg-tertiary rounded-full flex items-center justify-center hover:bg-quaternary transition-colors duration-200 cursor-pointer"
+            whileHover={{ rotate: 180, scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
             <img
               src="/assets/swap-icon.svg"
               alt="swap toggle"
               className="w-5 h-5 filter brightness-0 dark:invert"
             />
-          </button>
+          </motion.button>
         </div>
 
         {/* Receive card - mirror HeroSection styles */}
@@ -136,7 +144,7 @@ const Swap: React.FC = () => {
 
         {/* Swap button */}
         <div className="mt-6">
-          <button
+          <motion.button
             type="button"
             onClick={handleSwap}
             disabled={!canSwap}
@@ -147,11 +155,13 @@ const Swap: React.FC = () => {
             }`}
             title={canSwap ? 'Swap' : disabledReason}
             aria-disabled={!canSwap}
+            whileHover={canSwap ? { scale: 1.02 } : {}}
+            whileTap={canSwap ? { scale: 0.98 } : {}}
           >
             {canSwap ? 'Swap' : disabledReason}
-          </button>
+          </motion.button>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

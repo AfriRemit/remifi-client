@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
 
 const Header: React.FC = () => {
@@ -87,58 +88,66 @@ const Header: React.FC = () => {
         </div>
 
         {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="mt-4 pt-4 border-t border-tertiary md:hidden">
-            <div className="space-y-4">
-              {/* Mobile Navigation Links */}
-              <nav className="space-y-4">
-                <NavLink 
-                  to="/dashboard"
-                  onClick={() => setIsMenuOpen(false)}
-                  className={({ isActive }) => `block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${isActive ? 'text-accent-green' : ''}`}
-                >
-                  Dashboard
-                </NavLink>
-                <NavLink 
-                  to="/swap"
-                  onClick={() => setIsMenuOpen(false)}
-                  className={({ isActive }) => `block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${isActive ? 'text-accent-green' : ''}`}
-                >
-                  Swap
-                </NavLink>
-                <NavLink 
-                  to="/buy-sell"
-                  onClick={() => setIsMenuOpen(false)}
-                  className={({ isActive }) => `block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${isActive ? 'text-accent-green' : ''}`}
-                >
-                  Buy/Sell
-                </NavLink>
-                <NavLink 
-                  to="/activity"
-                  onClick={() => setIsMenuOpen(false)}
-                  className={({ isActive }) => `block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${isActive ? 'text-accent-green' : ''}`}
-                >
-                  Activity
-                </NavLink>
-                <NavLink 
-                  to="/utilities"
-                  onClick={() => setIsMenuOpen(false)}
-                  className={({ isActive }) => `block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${isActive ? 'text-accent-green' : ''}`}
-                >
-                  Utilities
-                </NavLink>
-              </nav>
-              
-              {/* Mobile Right side actions */}
-              <div className="flex items-center justify-between pt-4 border-t border-tertiary">
-                <ThemeToggle />
-                <button className="px-6 py-2 bg-accent-green hover:bg-accent-green-hover text-white rounded-full font-medium transition-colors duration-200">
-                  Connect
-                </button>
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div 
+              className="mt-4 pt-4 border-t border-tertiary md:hidden"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="space-y-4">
+                {/* Mobile Navigation Links */}
+                <nav className="space-y-4">
+                  <NavLink 
+                    to="/dashboard"
+                    onClick={() => setIsMenuOpen(false)}
+                    className={({ isActive }) => `block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${isActive ? 'text-accent-green' : ''}`}
+                  >
+                    Dashboard
+                  </NavLink>
+                  <NavLink 
+                    to="/swap"
+                    onClick={() => setIsMenuOpen(false)}
+                    className={({ isActive }) => `block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${isActive ? 'text-accent-green' : ''}`}
+                  >
+                    Swap
+                  </NavLink>
+                  <NavLink 
+                    to="/buy-sell"
+                    onClick={() => setIsMenuOpen(false)}
+                    className={({ isActive }) => `block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${isActive ? 'text-accent-green' : ''}`}
+                  >
+                    Buy/Sell
+                  </NavLink>
+                  <NavLink 
+                    to="/activity"
+                    onClick={() => setIsMenuOpen(false)}
+                    className={({ isActive }) => `block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${isActive ? 'text-accent-green' : ''}`}
+                  >
+                    Activity
+                  </NavLink>
+                  <NavLink 
+                    to="/utilities"
+                    onClick={() => setIsMenuOpen(false)}
+                    className={({ isActive }) => `block text-left w-full text-primary hover:text-accent-green transition-colors duration-200 py-2 ${isActive ? 'text-accent-green' : ''}`}
+                  >
+                    Utilities
+                  </NavLink>
+                </nav>
+                
+                {/* Mobile Right side actions */}
+                <div className="flex items-center justify-between pt-4 border-t border-tertiary">
+                  <ThemeToggle />
+                  <button className="px-6 py-2 bg-accent-green hover:bg-accent-green-hover text-white rounded-full font-medium transition-colors duration-200">
+                    Connect
+                  </button>
+                </div>
               </div>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );

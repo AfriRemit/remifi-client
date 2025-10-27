@@ -56,7 +56,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     // Add current theme class
     root.classList.add(theme);
     
-    // Set CSS custom properties for theme colors
+    // Set CSS custom properties for theme colors (Binance style for light mode)
     if (theme === 'dark') {
       root.style.setProperty('--bg-primary', '#121212');
       root.style.setProperty('--bg-secondary', '#1E1E1E');
@@ -65,12 +65,13 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       root.style.setProperty('--text-primary', '#FFFFFF');
       root.style.setProperty('--text-secondary', '#A0A0A0');
     } else {
-      root.style.setProperty('--bg-primary', '#FFFFFF');
-      root.style.setProperty('--bg-secondary', '#F8F9FA');
-      root.style.setProperty('--bg-tertiary', '#E9ECEF');
-      root.style.setProperty('--bg-quaternary', '#DEE2E6');
-      root.style.setProperty('--text-primary', '#1A1A1A');
-      root.style.setProperty('--text-secondary', '#6C757D');
+      root.style.setProperty('--bg-primary', '#F8F8F9');
+      root.style.setProperty('--bg-secondary', '#FFFFFF');
+      root.style.setProperty('--bg-tertiary', '#F5F5F7');
+      root.style.setProperty('--bg-quaternary', '#F0F0F0');
+      root.style.setProperty('--text-primary', '#181A20');
+      root.style.setProperty('--text-secondary', '#848E9C');
+      root.style.setProperty('--border-color', '#EAECEF');
     }
   }, [theme]);
 

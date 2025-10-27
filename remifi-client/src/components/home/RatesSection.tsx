@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 const NGNFlag = '/assets/ngn.svg';
 const KESFlag = '/assets/kes.svg';
 const GHSFlag = '/assets/ghs.svg';
@@ -97,14 +98,20 @@ const RatesSection: React.FC = () => {
         </div>
 
         {/* Right Content */}
-        <div className="space-y-6">
-          <h2 className="text-4xl lg:text-5xl font-medium text-primary leading-tight">
+        <motion.div 
+          className="space-y-6"
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-3xl lg:text-4xl font-semibold text-primary leading-tight tracking-tight">
             Know Your Rates in Real-Time
           </h2>
-          <p className="text-xl text-secondary leading-relaxed">
+          <p className="text-lg text-secondary leading-relaxed">
             Always updated, always transparent. Track cNGN, cKES, USDT and more before you swap.
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

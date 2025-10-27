@@ -22,14 +22,15 @@
   --metallic-silver-dark: #A0A0A0;
 }
 
-/* Light mode overrides */
+/* Light mode overrides - Binance style */
 .light {
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #F8F9FA;
-  --bg-tertiary: #E9ECEF;
-  --bg-quaternary: #DEE2E6;
-  --text-primary: #1A1A1A;
-  --text-secondary: #6C757D;
+  --bg-primary: #F8F8F9;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F5F5F7;
+  --bg-quaternary: #F0F0F0;
+  --text-primary: #181A20;
+  --text-secondary: #848E9C;
+  --border-color: #EAECEF;
 }
 
 /* Base styles */
