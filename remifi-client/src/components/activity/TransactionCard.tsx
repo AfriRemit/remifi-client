@@ -47,32 +47,6 @@ const TransactionCard: React.FC<TransactionCardProps> = ({ transaction }) => {
     }
   };
 
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case 'swap':
-        return '🔄';
-      case 'buy':
-        return '📈';
-      case 'sell':
-        return '📉';
-      case 'deposit':
-        return '⬇️';
-      case 'withdraw':
-        return '⬆️';
-      case 'add-liquidity':
-        return '💧';
-      case 'remove-liquidity':
-        return '💧';
-      case 'stake':
-        return '🔒';
-      case 'unstake':
-        return '🔓';
-      case 'claim-rewards':
-        return '🎁';
-      default:
-        return '💰';
-    }
-  };
 
   const formatTimeAgo = (date: Date) => {
     const now = new Date();
