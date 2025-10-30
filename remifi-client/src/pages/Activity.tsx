@@ -262,26 +262,26 @@ const ActivityPage: React.FC = () => {
 
     {/* Add Liquidity Modal */}
     {showAddModal && selectedPool && (
-      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowAddModal(false)}>
-        <div className="bg-secondary rounded-2xl p-6 w-full max-w-md border border-white/10" onClick={(e) => e.stopPropagation()}>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xl font-semibold text-primary">Add Liquidity</h3>
+      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 md:p-4" onClick={() => setShowAddModal(false)}>
+        <div className="bg-secondary rounded-2xl p-4 md:p-6 w-full max-w-md border border-white/10" onClick={(e) => e.stopPropagation()}>
+          <div className="flex items-center justify-between mb-3 md:mb-4">
+            <h3 className="text-lg md:text-xl font-semibold text-primary">Add Liquidity</h3>
             <button onClick={() => setShowAddModal(false)} className="w-8 h-8 rounded-full bg-tertiary hover:bg-quaternary flex items-center justify-center">✕</button>
           </div>
-          <div className="text-sm text-secondary mb-4">{selectedPool.tokenA}/{selectedPool.tokenB} • Pool #{selectedPool.id}</div>
-          <div className="space-y-4">
+          <div className="text-xs md:text-sm text-secondary mb-4">{selectedPool.tokenA}/{selectedPool.tokenB} • Pool #{selectedPool.id}</div>
+          <div className="space-y-3 md:space-y-4">
             <div>
-              <label className="block text-sm text-secondary mb-2">Amount {selectedPool.tokenA}</label>
-              <input value={amountA} onChange={(e)=>setAmountA(e.target.value)} inputMode="decimal" className="w-full px-4 py-3 bg-tertiary rounded-lg text-primary outline-none focus:ring-2 focus:ring-accent-green" placeholder="0.00" />
+              <label className="block text-xs md:text-sm text-secondary mb-2">Amount {selectedPool.tokenA}</label>
+              <input value={amountA} onChange={(e)=>setAmountA(e.target.value)} inputMode="decimal" className="w-full px-3 md:px-4 py-2.5 md:py-3 bg-tertiary rounded-lg text-primary outline-none focus:ring-2 focus:ring-accent-green" placeholder="0.00" />
             </div>
             <div>
-              <label className="block text-sm text-secondary mb-2">Amount {selectedPool.tokenB}</label>
-              <input value={amountB} onChange={(e)=>setAmountB(e.target.value)} inputMode="decimal" className="w-full px-4 py-3 bg-tertiary rounded-lg text-primary outline-none focus:ring-2 focus:ring-accent-green" placeholder="0.00" />
+              <label className="block text-xs md:text-sm text-secondary mb-2">Amount {selectedPool.tokenB}</label>
+              <input value={amountB} onChange={(e)=>setAmountB(e.target.value)} inputMode="decimal" className="w-full px-3 md:px-4 py-2.5 md:py-3 bg-tertiary rounded-lg text-primary outline-none focus:ring-2 focus:ring-accent-green" placeholder="0.00" />
             </div>
             <button
               disabled={!amountA || !amountB}
               onClick={() => { setShowAddModal(false); setSuccessMessage(`You added ${amountA} ${selectedPool.tokenA} and ${amountB} ${selectedPool.tokenB} to Pool #${selectedPool.id}.`); }}
-              className={`w-full px-6 py-3 rounded-xl font-semibold transition-colors ${amountA && amountB ? 'bg-accent-green text-white hover:bg-accent-green-hover' : 'bg-tertiary text-secondary cursor-not-allowed'}`}
+              className={`w-full px-5 md:px-6 py-2.5 md:py-3 rounded-xl text-sm md:text-base font-semibold transition-colors ${amountA && amountB ? 'bg-accent-green text-white hover:bg-accent-green-hover' : 'bg-tertiary text-secondary cursor-not-allowed'}`}
             >
               Confirm Add Liquidity
             </button>
@@ -292,16 +292,16 @@ const ActivityPage: React.FC = () => {
 
     {/* Remove Liquidity Modal */}
     {showRemoveModal && selectedPool && (
-      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowRemoveModal(false)}>
-        <div className="bg-secondary rounded-2xl p-6 w-full max-w-md border border-white/10" onClick={(e) => e.stopPropagation()}>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xl font-semibold text-primary">Remove Liquidity</h3>
+      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 md:p-4" onClick={() => setShowRemoveModal(false)}>
+        <div className="bg-secondary rounded-2xl p-4 md:p-6 w-full max-w-md border border-white/10" onClick={(e) => e.stopPropagation()}>
+          <div className="flex items-center justify-between mb-3 md:mb-4">
+            <h3 className="text-lg md:text-xl font-semibold text-primary">Remove Liquidity</h3>
             <button onClick={() => setShowRemoveModal(false)} className="w-8 h-8 rounded-full bg-tertiary hover:bg-quaternary flex items-center justify-center">✕</button>
           </div>
-          <div className="text-sm text-secondary mb-4">{selectedPool.tokenA}/{selectedPool.tokenB} • Pool #{selectedPool.id}</div>
-          <div className="space-y-4">
+          <div className="text-xs md:text-sm text-secondary mb-4">{selectedPool.tokenA}/{selectedPool.tokenB} • Pool #{selectedPool.id}</div>
+          <div className="space-y-3 md:space-y-4">
             <div>
-              <label className="block text-sm text-secondary mb-2">Remove Percentage</label>
+              <label className="block text-xs md:text-sm text-secondary mb-2">Remove Percentage</label>
               <div className="flex items-center gap-2">
                 {[25, 50, 75, 100].map(p => (
                   <button key={p} onClick={() => setRemovePercent(p)} className={`px-3 py-2 rounded-lg text-sm ${removePercent===p ? 'bg-accent-green text-white' : 'bg-tertiary text-primary hover:bg-quaternary'}`}>{p}%</button>
@@ -310,7 +310,7 @@ const ActivityPage: React.FC = () => {
             </div>
             <button
               onClick={() => { setShowRemoveModal(false); setSuccessMessage(`You removed ${removePercent}% of your position from Pool #${selectedPool.id}.`); }}
-              className="w-full px-6 py-3 bg-accent-green text-white rounded-xl font-semibold hover:bg-accent-green-hover transition-colors"
+              className="w-full px-5 md:px-6 py-2.5 md:py-3 bg-accent-green text-white rounded-xl text-sm md:text-base font-semibold hover:bg-accent-green-hover transition-colors"
             >
               Confirm Remove
             </button>
@@ -330,16 +330,16 @@ const ActivityPage: React.FC = () => {
 
     {/* Claim Fees Confirmation */}
     {showClaimConfirm && selectedPool && (
-      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowClaimConfirm(false)}>
-        <div className="bg-secondary rounded-2xl p-6 w-full max-w-md border border-white/10" onClick={(e) => e.stopPropagation()}>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xl font-semibold text-primary">Claim Fees?</h3>
+      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 md:p-4" onClick={() => setShowClaimConfirm(false)}>
+        <div className="bg-secondary rounded-2xl p-4 md:p-6 w-full max-w-md border border-white/10" onClick={(e) => e.stopPropagation()}>
+          <div className="flex items-center justify-between mb-3 md:mb-4">
+            <h3 className="text-lg md:text-xl font-semibold text-primary">Claim Fees?</h3>
             <button onClick={() => setShowClaimConfirm(false)} className="w-8 h-8 rounded-full bg-tertiary hover:bg-quaternary flex items-center justify-center">✕</button>
           </div>
-          <p className="text-sm text-secondary mb-6">You are about to claim your accrued fees from Pool #{selectedPool.id} ({selectedPool.tokenA}/{selectedPool.tokenB}). Continue?</p>
-          <div className="flex items-center justify-end gap-3">
-            <button onClick={() => setShowClaimConfirm(false)} className="px-4 py-2 bg-tertiary text-primary rounded-lg hover:bg-quaternary">Cancel</button>
-            <button onClick={() => { setShowClaimConfirm(false); setSuccessMessage(`You have successfully claimed fees from Pool #${selectedPool.id}. Your wallet has been updated.`); }} className="px-4 py-2 bg-accent-green text-white rounded-lg hover:bg-accent-green-hover">Confirm</button>
+          <p className="text-xs md:text-sm text-secondary mb-4 md:mb-6">You are about to claim your accrued fees from Pool #{selectedPool.id} ({selectedPool.tokenA}/{selectedPool.tokenB}). Continue?</p>
+          <div className="flex items-center justify-end gap-2 md:gap-3">
+            <button onClick={() => setShowClaimConfirm(false)} className="px-3 md:px-4 py-2 bg-tertiary text-primary rounded-lg hover:bg-quaternary text-sm md:text-base">Cancel</button>
+            <button onClick={() => { setShowClaimConfirm(false); setSuccessMessage(`You have successfully claimed fees from Pool #${selectedPool.id}. Your wallet has been updated.`); }} className="px-3 md:px-4 py-2 bg-accent-green text-white rounded-lg hover:bg-accent-green-hover text-sm md:text-base">Confirm</button>
           </div>
         </div>
       </div>
