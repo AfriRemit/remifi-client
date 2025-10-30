@@ -24,10 +24,7 @@ const QuickActions: React.FC = () => {
     {
       name: 'Send/Receive',
       icon: <img src="/assets/Icons (1).svg" alt="Send/Receive" className="w-6 h-6" />,
-      onClick: () => {
-        // Placeholder for send/receive functionality
-        alert('Send/Receive feature coming soon!');
-      }
+      onClick: () => navigate('/buy-sell')
     },
   ];
 
@@ -54,6 +51,7 @@ const QuickActions: React.FC = () => {
         </motion.button>
       ))}
     </div>
+    
   );
 };
 
