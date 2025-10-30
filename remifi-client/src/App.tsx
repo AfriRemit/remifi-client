@@ -12,6 +12,13 @@ import SwapPage from './pages/Swap';
 import BuySellPage from './pages/BuySell';
 import ActivityPage from './pages/Activity';
 import UtilitiesPage from './pages/Utilities';
+import WaterBillPage from './pages/utilities/Water';
+import ElectricityBillPage from './pages/utilities/Electricity';
+import FlightBookingPage from './pages/utilities/FlightBooking.tsx';
+import InternetBillPage from './pages/utilities/Internet';
+import CableTVPage from './pages/utilities/CableTV';
+import GasBillPage from './pages/utilities/Gas';
+import UtilityCheckoutPage from './pages/utilities/Checkout';
 import CreatePoolPage from './pages/CreatePool';
 import Footer from './components/Footer';
 
@@ -40,6 +47,13 @@ function App() {
           <Route path="/buy-sell" element={<BuySellPage />} />
           <Route path="/activity" element={<ActivityPage />} />
           <Route path="/utilities" element={<UtilitiesPage />} />
+          <Route path="/utilities/water" element={<WaterBillPage />} />
+          <Route path="/utilities/electricity" element={<ElectricityBillPage />} />
+          <Route path="/utilities/flight" element={<FlightBookingPage />} />
+          <Route path="/utilities/internet" element={<InternetBillPage />} />
+          <Route path="/utilities/cable" element={<CableTVPage />} />
+          <Route path="/utilities/gas" element={<GasBillPage />} />
+          <Route path="/utilities/checkout" element={<UtilityCheckoutPage />} />
           <Route path="/create-pool" element={<CreatePoolPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

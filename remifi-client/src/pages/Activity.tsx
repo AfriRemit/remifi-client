@@ -3,7 +3,8 @@ import type { TokenSymbol } from '../components/swap/tokens';
 import TransactionCard from '../components/activity/TransactionCard';
 import LiquidityPoolCard from '../components/activity/LiquidityPoolCard';
 import StakingCard from '../components/activity/StakingCard';
-import ActivityTabs, { type ActivityTab } from '../components/activity/ActivityTabs';
+import OperationConfirmationModal from '../components/common/OperationConfirmationModal';
+type LocalTab = 'transactions' | 'liquidity' | 'staking';
 
 interface Transaction {
   id: string;
@@ -33,9 +34,17 @@ interface LiquidityPool {
 }
 
 const ActivityPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<ActivityTab>('all');
+  const [activeTab, setActiveTab] = useState<LocalTab>('transactions');
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showRemoveModal, setShowRemoveModal] = useState(false);
+  const [showClaimConfirm, setShowClaimConfirm] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [selectedPool, setSelectedPool] = useState<LiquidityPool | null>(null);
+  const [amountA, setAmountA] = useState('');
+  const [amountB, setAmountB] = useState('');
+  const [removePercent, setRemovePercent] = useState(25);
 
-  // Mock transaction data
+  // Transactions data for the Transactions tab
   const transactions: Transaction[] = [
     {
       id: '1',
@@ -45,9 +54,8 @@ const ActivityPage: React.FC = () => {
       fromAmount: 100,
       toAmount: 130607,
       status: 'completed',
-      timestamp: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago
-      hash: '0x1234...5678',
-      fee: 0.3
+      timestamp: new Date(Date.now() - 1000 * 60 * 30),
+      hash: '0x1234...5678'
     },
     {
       id: '2',
@@ -57,9 +65,8 @@ const ActivityPage: React.FC = () => {
       fromAmount: 500,
       toAmount: 653035,
       status: 'completed',
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago
+      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2),
       hash: '0x2345...6789',
-      poolId: 'USDT-NGN',
       apy: 12.5
     },
     {
@@ -70,44 +77,9 @@ const ActivityPage: React.FC = () => {
       fromAmount: 1000,
       toAmount: 0,
       status: 'completed',
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 4), // 4 hours ago
+      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 4),
       hash: '0x3456...7890',
       apy: 8.2
-    },
-    {
-      id: '4',
-      type: 'claim-rewards',
-      fromToken: 'USDT',
-      toToken: 'NGN',
-      fromAmount: 0,
-      toAmount: 25.5,
-      status: 'completed',
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 6), // 6 hours ago
-      hash: '0x4567...8901'
-    },
-    {
-      id: '5',
-      type: 'remove-liquidity',
-      fromToken: 'USDT',
-      toToken: 'GHS',
-      fromAmount: 200,
-      toAmount: 2500,
-      status: 'pending',
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 8), // 8 hours ago
-      hash: '0x5678...9012',
-      poolId: 'USDT-GHS'
-    },
-    {
-      id: '6',
-      type: 'swap',
-      fromToken: 'KES',
-      toToken: 'USDT',
-      fromAmount: 15000,
-      toAmount: 11.5,
-      status: 'completed',
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago
-      hash: '0x6789...0123',
-      fee: 0.35
     }
   ];
 
@@ -150,18 +122,24 @@ const ActivityPage: React.FC = () => {
 
   // Handler functions for component callbacks
   const handleAddLiquidity = (poolId: string) => {
-    console.log('Add liquidity to pool:', poolId);
-    // Implement add liquidity logic
+    const pool = liquidityPools.find(p => p.id === poolId) || null;
+    setSelectedPool(pool);
+    setAmountA('');
+    setAmountB('');
+    setShowAddModal(true);
   };
 
   const handleRemoveLiquidity = (poolId: string) => {
-    console.log('Remove liquidity from pool:', poolId);
-    // Implement remove liquidity logic
+    const pool = liquidityPools.find(p => p.id === poolId) || null;
+    setSelectedPool(pool);
+    setRemovePercent(25);
+    setShowRemoveModal(true);
   };
 
   const handleClaimFees = (poolId: string) => {
-    console.log('Claim fees from pool:', poolId);
-    // Implement claim fees logic
+    const pool = liquidityPools.find(p => p.id === poolId) || null;
+    setSelectedPool(pool);
+    setShowClaimConfirm(true);
   };
 
   const handleClaimRewards = (positionId: string) => {
@@ -174,16 +152,10 @@ const ActivityPage: React.FC = () => {
     // Implement stake logic
   };
 
-  const filteredTransactions = transactions.filter(tx => {
-    if (activeTab === 'all') return true;
-    if (activeTab === 'swaps') return tx.type === 'swap';
-    if (activeTab === 'transfers') return ['buy', 'sell', 'deposit', 'withdraw'].includes(tx.type);
-    if (activeTab === 'liquidity') return ['add-liquidity', 'remove-liquidity'].includes(tx.type) && tx.id !== '2' && tx.id !== '5';
-    if (activeTab === 'staking') return ['stake', 'unstake', 'claim-rewards'].includes(tx.type) && tx.id !== '3' && tx.id !== '4';
-    return true;
-  });
+  // Transactions list hidden for now
 
   return (
+    <>
     <div className="min-h-screen px-6 py-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
@@ -192,35 +164,34 @@ const ActivityPage: React.FC = () => {
           <p className="text-secondary">Track your transaction history and status</p>
         </div>
 
-        {/* Tabs */}
-        <ActivityTabs activeTab={activeTab} onTabChange={setActiveTab} />
+        {/* Tabs: Transactions, Liquidity, Staking */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 -mx-1 px-1">
+          {[
+            { id: 'transactions', label: 'Transactions' },
+            { id: 'liquidity', label: 'Liquidity' },
+            { id: 'staking', label: 'Staking' },
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id as LocalTab)}
+              className={`px-3 py-2 rounded-lg text-xs md:text-sm font-medium transition-colors whitespace-nowrap ${
+                activeTab === (tab.id as LocalTab)
+                  ? 'bg-accent-green text-white'
+                  : 'bg-tertiary text-primary hover:bg-quaternary'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
 
-        {/* Transaction List - Only show for non-liquidity/staking tabs */}
-        {(activeTab === 'all' || activeTab === 'swaps' || activeTab === 'transfers') && (
-          <>
-            <div className="space-y-3">
-              {filteredTransactions.length === 0 ? (
-                <div className="bg-secondary rounded-xl p-8 text-center border border-white/10">
-                  <div className="text-4xl mb-4">📊</div>
-                  <h3 className="text-lg font-semibold text-primary mb-2">No transactions yet</h3>
-                  <p className="text-secondary">Your transaction history will appear here</p>
-                </div>
-              ) : (
-                filteredTransactions.map((tx) => (
-                  <TransactionCard key={tx.id} transaction={tx} />
-                ))
-              )}
-            </div>
-
-            {/* Load More Button */}
-            {filteredTransactions.length > 0 && (
-              <div className="mt-6 text-center">
-                <button className="px-6 py-2 bg-tertiary text-primary rounded-xl hover:bg-quaternary transition-colors duration-200">
-                  Load More
-                </button>
-              </div>
-            )}
-          </>
+        {/* Transactions section */}
+        {activeTab === 'transactions' && (
+          <div className="mt-6 space-y-3">
+            {transactions.map((tx) => (
+              <TransactionCard key={tx.id} transaction={tx} />
+            ))}
+          </div>
         )}
 
         {/* Liquidity Pools Section */}
@@ -237,7 +208,7 @@ const ActivityPage: React.FC = () => {
                 onClick={() => window.location.href = '/create-pool'}
                 className="w-full px-6 py-4 bg-tertiary text-primary rounded-xl border-2 border-dashed border-white/20 hover:border-accent-green hover:text-accent-green transition-colors duration-200"
               >
-                <div className="text-2xl mb-2">➕</div>
+                <img src="/assets/createicon.svg" alt="Create" className="w-10 h-10 mb-2 inline-block dark:invert" />
                 <div className="font-semibold">Create New Pool</div>
                 <div className="text-sm text-secondary">Start earning fees with a new liquidity pool</div>
               </button>
@@ -288,6 +259,92 @@ const ActivityPage: React.FC = () => {
         )}
       </div>
     </div>
+
+    {/* Add Liquidity Modal */}
+    {showAddModal && selectedPool && (
+      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowAddModal(false)}>
+        <div className="bg-secondary rounded-2xl p-6 w-full max-w-md border border-white/10" onClick={(e) => e.stopPropagation()}>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xl font-semibold text-primary">Add Liquidity</h3>
+            <button onClick={() => setShowAddModal(false)} className="w-8 h-8 rounded-full bg-tertiary hover:bg-quaternary flex items-center justify-center">✕</button>
+          </div>
+          <div className="text-sm text-secondary mb-4">{selectedPool.tokenA}/{selectedPool.tokenB} • Pool #{selectedPool.id}</div>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm text-secondary mb-2">Amount {selectedPool.tokenA}</label>
+              <input value={amountA} onChange={(e)=>setAmountA(e.target.value)} inputMode="decimal" className="w-full px-4 py-3 bg-tertiary rounded-lg text-primary outline-none focus:ring-2 focus:ring-accent-green" placeholder="0.00" />
+            </div>
+            <div>
+              <label className="block text-sm text-secondary mb-2">Amount {selectedPool.tokenB}</label>
+              <input value={amountB} onChange={(e)=>setAmountB(e.target.value)} inputMode="decimal" className="w-full px-4 py-3 bg-tertiary rounded-lg text-primary outline-none focus:ring-2 focus:ring-accent-green" placeholder="0.00" />
+            </div>
+            <button
+              disabled={!amountA || !amountB}
+              onClick={() => { setShowAddModal(false); setSuccessMessage(`You added ${amountA} ${selectedPool.tokenA} and ${amountB} ${selectedPool.tokenB} to Pool #${selectedPool.id}.`); }}
+              className={`w-full px-6 py-3 rounded-xl font-semibold transition-colors ${amountA && amountB ? 'bg-accent-green text-white hover:bg-accent-green-hover' : 'bg-tertiary text-secondary cursor-not-allowed'}`}
+            >
+              Confirm Add Liquidity
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {/* Remove Liquidity Modal */}
+    {showRemoveModal && selectedPool && (
+      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowRemoveModal(false)}>
+        <div className="bg-secondary rounded-2xl p-6 w-full max-w-md border border-white/10" onClick={(e) => e.stopPropagation()}>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xl font-semibold text-primary">Remove Liquidity</h3>
+            <button onClick={() => setShowRemoveModal(false)} className="w-8 h-8 rounded-full bg-tertiary hover:bg-quaternary flex items-center justify-center">✕</button>
+          </div>
+          <div className="text-sm text-secondary mb-4">{selectedPool.tokenA}/{selectedPool.tokenB} • Pool #{selectedPool.id}</div>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm text-secondary mb-2">Remove Percentage</label>
+              <div className="flex items-center gap-2">
+                {[25, 50, 75, 100].map(p => (
+                  <button key={p} onClick={() => setRemovePercent(p)} className={`px-3 py-2 rounded-lg text-sm ${removePercent===p ? 'bg-accent-green text-white' : 'bg-tertiary text-primary hover:bg-quaternary'}`}>{p}%</button>
+                ))}
+              </div>
+            </div>
+            <button
+              onClick={() => { setShowRemoveModal(false); setSuccessMessage(`You removed ${removePercent}% of your position from Pool #${selectedPool.id}.`); }}
+              className="w-full px-6 py-3 bg-accent-green text-white rounded-xl font-semibold hover:bg-accent-green-hover transition-colors"
+            >
+              Confirm Remove
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {/* Success Confirmation */}
+    <OperationConfirmationModal
+      isOpen={!!successMessage}
+      onClose={() => setSuccessMessage(null)}
+      title="Transaction confirmed"
+      message={successMessage || ''}
+      ctaLabel="Close"
+    />
+
+    {/* Claim Fees Confirmation */}
+    {showClaimConfirm && selectedPool && (
+      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowClaimConfirm(false)}>
+        <div className="bg-secondary rounded-2xl p-6 w-full max-w-md border border-white/10" onClick={(e) => e.stopPropagation()}>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xl font-semibold text-primary">Claim Fees?</h3>
+            <button onClick={() => setShowClaimConfirm(false)} className="w-8 h-8 rounded-full bg-tertiary hover:bg-quaternary flex items-center justify-center">✕</button>
+          </div>
+          <p className="text-sm text-secondary mb-6">You are about to claim your accrued fees from Pool #{selectedPool.id} ({selectedPool.tokenA}/{selectedPool.tokenB}). Continue?</p>
+          <div className="flex items-center justify-end gap-3">
+            <button onClick={() => setShowClaimConfirm(false)} className="px-4 py-2 bg-tertiary text-primary rounded-lg hover:bg-quaternary">Cancel</button>
+            <button onClick={() => { setShowClaimConfirm(false); setSuccessMessage(`You have successfully claimed fees from Pool #${selectedPool.id}. Your wallet has been updated.`); }} className="px-4 py-2 bg-accent-green text-white rounded-lg hover:bg-accent-green-hover">Confirm</button>
+          </div>
+        </div>
+      </div>
+    )}
+    </>
   );
 };
 

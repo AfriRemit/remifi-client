@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import TokenSelect from './TokenSelect';
 import type { TokenSymbol } from './tokens';
 import { getQuote, MOCK_PRICES_USDT } from './tokens';
+import OperationConfirmationModal from '../common/OperationConfirmationModal';
 
 // Legacy Coin type kept for reference; token selection now uses TokenSymbol
 
@@ -50,10 +51,11 @@ const Swap: React.FC = () => {
     : sendCoin === receiveCoin
       ? 'Select different tokens'
       : ((receiveQuote || 0) <= 0 ? 'No quote' : '');
+  const [showSuccess, setShowSuccess] = useState(false);
   const handleSwap = () => {
     if (!canSwap) return;
     // Placeholder for real swap flow (e.g., wallet tx)
-    alert(`Swapping ${parsedSend} ${sendCoin} for ~${(receiveQuote || 0).toFixed(2)} ${receiveCoin}`);
+    setShowSuccess(true);
   };
 
   return (
@@ -263,6 +265,17 @@ const Swap: React.FC = () => {
           )}
         </AnimatePresence>
       </motion.div>
+      <OperationConfirmationModal
+        isOpen={showSuccess}
+        onClose={() => setShowSuccess(false)}
+        title="Transaction confirmed"
+        message={
+          <>
+            You've successfully swapped <span className="text-accent-green font-semibold">{parsedSend} {sendCoin}</span> for approximately <span className="text-accent-green font-semibold">{(receiveQuote || 0).toFixed(2)} {receiveCoin}</span>. Your wallet has been updated.
+          </>
+        }
+        ctaLabel="Close"
+      />
     </section>
   );
 };
